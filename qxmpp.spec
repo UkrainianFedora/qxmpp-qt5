@@ -3,7 +3,7 @@ Version:    0.7.3
 Release:    2%{?dist}
 License:    LGPLv2+
 Source0:    http://qxmpp.googlecode.com/files/qxmpp-0.7.3.tar.gz 
-Obsoletes:  qxmpp-dev < %{version}
+Obsoletes:  qxmpp-dev < 0.7.3 
 Provides:   qxmpp-dev = %{version}-%{release}
 
 Patch1:     qxmpp-dynamiclib.patch
@@ -29,7 +29,7 @@ always recommended to the advanced users to read and enjoy the low level details
 Summary:      QXmpp Development Files
 Group:        Development/Libraries
 Requires:     %{name}%{?_isa} = %{version}-%{release}
-Obsoletes: qxmpp-dev-devel < %{version}
+Obsoletes: qxmpp-dev-devel < 0.7.3
 Provides:  qxmpp-dev-devel = %{version}-%{release}
 
 %description devel
