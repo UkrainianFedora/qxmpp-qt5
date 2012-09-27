@@ -1,6 +1,6 @@
 Name:       qxmpp
 Version:    0.7.3
-Release:    2%{?dist}
+Release:    3%{?dist}
 License:    LGPLv2+
 Source0:    http://qxmpp.googlecode.com/files/qxmpp-0.7.3.tar.gz 
 Obsoletes:  qxmpp-dev < 0.7.3 
@@ -64,6 +64,9 @@ make %{?_smp_mflags}
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Thu Sep 27 2012 Minh Ngo <nlminhtl@gmail.com> 0.7.3-3
+- Upd. source archive
+
 * Wed Sep 26 2012 Minh Ngo <nlminhtl@gmail.com> 0.7.3-2
 - Adding obsoletes
 
