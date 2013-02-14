@@ -1,10 +1,10 @@
 Name:       qxmpp
-Version:    0.7.4
+Version:    0.7.5
 Release:    1%{?dist}
 License:    LGPLv2+
 
-Source0:    http://qxmpp.googlecode.com/files/qxmpp-0.7.4.tar.gz
-Obsoletes:  qxmpp-dev < 0.7.3
+Source0:    http://qxmpp.googlecode.com/files/qxmpp-0.7.5.tar.gz
+Obsoletes:  qxmpp-dev < 0.7.5
 Provides:   qxmpp-dev = %{version}-%{release}
 
 Patch1:     qxmpp-dynamiclib.patch
@@ -28,7 +28,7 @@ always recommended to the advanced users to read and enjoy the low level details
 %package devel
 Summary:      QXmpp Development Files
 Requires:     %{name}%{?_isa} = %{version}-%{release}
-Obsoletes: qxmpp-dev-devel < 0.7.3 
+Obsoletes: qxmpp-dev-devel < 0.7.5 
 Provides:  qxmpp-dev-devel = %{version}-%{release}
 
 %description devel
@@ -54,7 +54,7 @@ make %{?_smp_mflags}
 %doc AUTHORS CHANGELOG LICENSE.LGPL README
 %{_libdir}/libqxmpp.so.0
 %{_libdir}/libqxmpp.so.0.7
-%{_libdir}/libqxmpp.so.0.7.4
+%{_libdir}/libqxmpp.so.0.7.5
 
 %files devel
 %doc %{_datadir}/doc/qxmpp
@@ -63,6 +63,9 @@ make %{?_smp_mflags}
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Thu Feb 14 2013 Minh Ngo <nlminhtl@gmail.com> 0.7.5-1
+- new version
+
 * Fri Nov 09 2012 Minh Ngo <nlminhtl@gmail.com> 0.7.4-1
 - new version
 
