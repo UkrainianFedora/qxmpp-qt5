@@ -1,6 +1,6 @@
 Name:       qxmpp
 Version:    0.7.5
-Release:    1%{?dist}
+Release:    2%{?dist}
 License:    LGPLv2+
 
 Source0:    http://qxmpp.googlecode.com/files/qxmpp-0.7.5.tar.gz
@@ -63,6 +63,9 @@ make %{?_smp_mflags}
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.7.5-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
 * Thu Feb 14 2013 Minh Ngo <nlminhtl@gmail.com> 0.7.5-1
 - new version
 
