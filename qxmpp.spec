@@ -1,6 +1,6 @@
 Name:       qxmpp
 Version:    0.7.5
-Release:    2%{?dist}
+Release:    3%{?dist}
 License:    LGPLv2+
 
 Source0:    http://qxmpp.googlecode.com/files/qxmpp-0.7.5.tar.gz
@@ -47,6 +47,10 @@ make %{?_smp_mflags}
 %install
 %make_install INSTALL_ROOT=${RPM_BUILD_ROOT}
 
+# move installed docs to include them in -devel package via %%doc magic
+rm -rf __tmp_doc ; mkdir __tmp_doc
+mv ${RPM_BUILD_ROOT}%{_docdir}/%{name}/* __tmp_doc
+
 %post -n %{name} -p /sbin/ldconfig
 %postun -n %{name} -p /sbin/ldconfig
 
@@ -57,12 +61,15 @@ make %{?_smp_mflags}
 %{_libdir}/libqxmpp.so.0.7.5
 
 %files devel
-%doc %{_datadir}/doc/qxmpp
+%doc __tmp_doc/*
 %{_libdir}/lib%{name}.so
 %{_includedir}/%{name}
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Fri Dec 13 2013 Michael Schwendt <mschwendt@fedoraproject.org> - 0.7.5-3
+- Fix duplicate documentation (#1001295)
+
 * Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.7.5-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
@@ -72,7 +79,7 @@ make %{?_smp_mflags}
 * Fri Nov 09 2012 Minh Ngo <nlminhtl@gmail.com> 0.7.4-1
 - new version
 
-* Sat Sep 30 2012 Minh Ngo <nlminhtl@gmail.com> 0.7.3-4
+* Sun Sep 30 2012 Minh Ngo <nlminhtl@gmail.com> 0.7.3-4
 - Upd. to the last version for leechcraft IC compatibility.
 
 * Wed Sep 26 2012 Minh Ngo <nlminhtl@gmail.com> 0.7.3-2
@@ -92,7 +99,7 @@ make %{?_smp_mflags}
 - Synchronization with upstream
 - updating patches
 
-* Sun Mar 14 2012 Minh Ngo <nlminhtl@gmail.com> 0.3.45.2-1
+* Wed Mar 14 2012 Minh Ngo <nlminhtl@gmail.com> 0.3.45.2-1
 - Synchronization with upstream
 
 * Tue Feb 28 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.3.45.1-6
@@ -101,7 +108,7 @@ make %{?_smp_mflags}
 * Sat Jan 14 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.3.45.1-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
 
-* Mon Jan 08 2012 Minh Ngo <nlminhtl@gmail.com> 0.3.45.1-4
+* Sun Jan 08 2012 Minh Ngo <nlminhtl@gmail.com> 0.3.45.1-4
 - fixing summary/description in the devel package
 - adding a dependence for the devel package
 
