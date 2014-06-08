@@ -1,6 +1,6 @@
 Name:       qxmpp
 Version:    0.7.5
-Release:    3%{?dist}
+Release:    4%{?dist}
 License:    LGPLv2+
 
 Source0:    http://qxmpp.googlecode.com/files/qxmpp-0.7.5.tar.gz
@@ -67,6 +67,9 @@ mv ${RPM_BUILD_ROOT}%{_docdir}/%{name}/* __tmp_doc
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Sun Jun 08 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.7.5-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
 * Fri Dec 13 2013 Michael Schwendt <mschwendt@fedoraproject.org> - 0.7.5-3
 - Fix duplicate documentation (#1001295)
 
