@@ -1,19 +1,16 @@
-Name:       qxmpp
-Version:    0.7.5
-Release:    6%{?dist}
+Name:       qxmpp-qt5
+Version:    0.8.3
+Release:    1%{?dist}
 License:    LGPLv2+
 
-Source0:    http://qxmpp.googlecode.com/files/qxmpp-0.7.5.tar.gz
-Obsoletes:  qxmpp-dev < 0.7.5
-Provides:   qxmpp-dev = %{version}-%{release}
-
-Patch1:     qxmpp-dynamiclib.patch
+Source0:    https://github.com/qxmpp-project/qxmpp/archive/v0.8.3.tar.gz
 
 Summary:    Qt XMPP Library
-URL:        http://code.google.com/p/qxmpp/
+URL:        https://github.com/qxmpp-project/qxmpp/
 
-BuildRequires:  qt4-devel
+BuildRequires:  qt5-qtbase-devel
 BuildRequires:  speex-devel
+BuildRequires:  doxygen
 
 %description
 QXmpp is a cross-platform C++ XMPP client library. It is based on Qt and C++.
@@ -28,8 +25,6 @@ always recommended to the advanced users to read and enjoy the low level details
 %package devel
 Summary:      QXmpp Development Files
 Requires:     %{name}%{?_isa} = %{version}-%{release}
-Obsoletes: qxmpp-dev-devel < 0.7.5 
-Provides:  qxmpp-dev-devel = %{version}-%{release}
 
 %description devel
 It's a development package for qxmpp-dev.
@@ -37,36 +32,36 @@ It's a development package for qxmpp-dev.
 QXmpp is a cross-platform C++ XMPP client library. It is based on Qt and C++.
 
 %prep
-%setup -q
-%patch1 -p1
+%setup -qn qxmpp-%{version}
+sed -i 's/QXMPP_LIBRARY_NAME = qxmpp/QXMPP_LIBRARY_NAME = qxmpp-qt5/g' qxmpp.pri
+sed -i 's/\$\$PREFIX\/include\/qxmpp/\$\$PREFIX\/include\/qxmpp-qt5/' src/src.pro
 
 %build
-%{_qt4_qmake} PREFIX=%{_prefix} LIBDIR=%{_lib} QMAKE_STRIP="" QMAKE_CXXFLAGS+="%{optflags}"
+%{_qt5_qmake} PREFIX=%{_prefix} LIBDIR=%{_lib} QMAKE_STRIP="" QMAKE_CXXFLAGS+="%{optflags}"
 make %{?_smp_mflags}
 
 %install
 %make_install INSTALL_ROOT=${RPM_BUILD_ROOT}
 
-# move installed docs to include them in -devel package via %%doc magic
-rm -rf __tmp_doc ; mkdir __tmp_doc
-mv ${RPM_BUILD_ROOT}%{_docdir}/%{name}/* __tmp_doc
 
 %post -n %{name} -p /sbin/ldconfig
 %postun -n %{name} -p /sbin/ldconfig
 
 %files 
-%doc AUTHORS CHANGELOG LICENSE.LGPL README
-%{_libdir}/libqxmpp.so.0
-%{_libdir}/libqxmpp.so.0.7
-%{_libdir}/libqxmpp.so.0.7.5
+%doc AUTHORS CHANGELOG LICENSE.LGPL README.md
+%{_libdir}/lib%{name}.so.0
+%{_libdir}/lib%{name}.so.0.8
+%{_libdir}/lib%{name}.so.0.8.3
 
 %files devel
-%doc __tmp_doc/*
 %{_libdir}/lib%{name}.so
 %{_includedir}/%{name}
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Fri May 29 2015 Kalev Lember <kalevlember@gmail.com> - 0.8.3-1
+- v8.3.3. Qt5 build
+
 * Sat May 02 2015 Kalev Lember <kalevlember@gmail.com> - 0.7.5-6
 - Rebuilt for GCC 5 C++11 ABI change
 
